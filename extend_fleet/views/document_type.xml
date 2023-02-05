@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--FORM view-->
+    <record id="document_type_template_form_view" model="ir.ui.view">
+        <field name="name">extend_fleet.document_type form view (in Vehicle)</field>
+        <field name="model">extend_fleet.document_type</field>
+        <field name="arch" type="xml">
+            <form string="Type de document">
+                <sheet>
+                    <group>
+                        <group name="name">
+                            <field name="name" />
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--TREE view-->
+    <record id="document_type_tree_view" model="ir.ui.view">
+        <field name="name">extend_fleet.document_type tree view (in salaire)</field>
+        <field name="model">extend_fleet.document_type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!--SEARCH view-->
+    <record id="document_type_search_view" model="ir.ui.view">
+        <field name="name">extend_fleet.document_type search view (in Vehicle)</field>
+        <field name="model">extend_fleet.document_type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <!--ACTION-->
+    <record id="document_type_action" model="ir.actions.act_window">
+        <field name="name">Type de document</field>
+        <field name="res_model">extend_fleet.document_type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="document_type_search_view" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un type de document.
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="document_type_menu"
+        name="Type de document"
+        parent="fleet.fleet_configuration"
+        action="document_type_action"
+        sequence="1"
+    />
+</odoo>

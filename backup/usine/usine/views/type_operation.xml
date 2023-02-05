@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+    <record id="view_type_operation_form" model="ir.ui.view">
+                <field name="name">usine.type.operation.form</field>
+                <field name="model">usine.type.operation</field>
+                <field name="arch" type="xml">
+                  <form string="Pointages Femmes">
+                   <sheet>
+                       <group name="Type d'opération">
+                           <div class="row">
+                               <div class="col-2"><label for="name"/></div>
+                               <div class="col-5"><field name="name"/></div>
+                           </div>
+                           <br/>
+                           <div class="row">
+                               <div class="col-2"><label for="taux"/></div>
+                               <div class="col-5"><field name="taux"/></div>
+                           </div>
+                       </group>
+
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!-- Action  pour ouvrir la liste des type d'opération -->
+    <record id="type_operation_action" model="ir.actions.act_window">
+        <field name="name">Types d'opération</field>
+        <field name="res_model">usine.type.operation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_type_operation_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un type d'opération
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_configuration_type_operation"
+        name="Type Opération"
+        sequence="1"
+        parent="usine.menu_configuration"
+        action="type_operation_action"
+    />
+
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+document_type_manager,Document Type manager,model_extend_fleet_document_type,base.group_user,1,1,1,1
+document_manager,Document  manager,model_document,base.group_user,1,1,1,1
+fleet_vehicle_log_document_access_right,fleet_vehicle_log_document_access_right,model_fleet_vehicle_log_document,base.group_user,1,1,1,1
+fleet_vehicle_lines_access_right,fleet_vehicle_lines_access_right,model_fleet_vehicle_lines,base.group_user,1,1,1,1

@@ -1,0 +1,434 @@
+<?xml version="1.0"?>
+<odoo>
+
+<!--    <record id="view_usine_type_article_form" model="ir.ui.view">
+                <field name="name">usine.type.article.form</field>
+                <field name="model">usine.type.article</field>
+                <field name="arch" type="xml">
+                  <form string="Article">
+                   <sheet>
+                       <group >
+                           <field name="name"/>
+                           <field name="description"/>
+                           <field name="prix"/>
+                       </group>
+
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>-->
+
+    <record id="view_vente_form" model="ir.ui.view">
+        <field name="name">usine.vente.form</field>
+        <field name="model">usine.vente</field>
+        <field name="arch" type="xml">
+            <form string="Ventes">
+                <header>
+                        <button name="encaisser" string="Encaisser" type="object" class="btn-success"/>
+                </header>
+                <sheet>
+
+                    <group name="Vente">
+                        <field name="name" class="oe_inline"/>
+                        <field name="date_vente" class="oe_inline" required="1"/>
+                    </group>
+                    <notebook string="Lignes de vente">
+                        <page string="Lignes de vente">
+                            <field
+                                    name="vente_lines"
+                                    widget="section_and_note_one2many"
+                                    mode="tree,kanban"
+                            >
+
+                                <tree string="Lignes de vente"
+                                      editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Ajouter une ligne"/>
+                                    </control>
+                                    <field name="numero" required="1"/>
+                                    <field name="vendeur" required="1"/>
+                                    <field name="vehicule_id" required="1" width="200px"/>
+                                    <field name="type_article_id" required="1" width="200px"/>
+                                    <field name="prix_unitaire"/>
+                                    <field name="quantite"/>
+                                    <!--<field name="taxe"/>-->
+                                    <field name="montant_total" />
+                                    <field name="status_encaissement" invisible="1"/>
+                                    <field name="vente_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+                            <footer>
+                                    <button name="synthese" type="object" string="Synthèse"/>
+                            </footer>
+                        </page>
+                        <page string="Ligne sythèse">
+                                <field
+                                    name="synthese_lines"
+                                >
+
+                                    <tree string="Ligne sythèse" editable="bottom">
+                                        <field name="vendeur_id" required="1" width="200px"/>
+                                        <field name="total_vendu"/>
+                                        <field name="vente_credit" required="1" width="200px"/>
+                                        <field name="creance_recouvre"/>
+                                        <field name="recette_net"/>
+
+                                    </tree>
+                                </field>
+                         </page>
+
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des ventes -->
+    <record id="view_vente_tree" model="ir.ui.view">
+        <field name="name">usine.vente.tree</field>
+        <field name="model">usine.vente</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Liste des ventes" class="o_sale_order" >
+                <field name="name"/>
+                <field name="date_vente"/>
+                <field name="montant_total"/>
+                <field name="status" decoration-success="status == 'encaisse'" decoration-danger="status == 'non_encaisse'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste de vente -->
+    <record id="vente_action" model="ir.actions.act_window">
+        <field name="name">Liste des ventes</field>
+        <field name="res_model">usine.vente</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_vente_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour enregistrer une vente
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu Ventes-->
+    <menuitem
+            id="menu_ventes"
+            name="Ventes"
+            parent="menu_usine"
+            sequence="2"
+    />
+    <!-- LE Menu Enregistrer une vente-->
+    <menuitem
+            id="menu_enregister_ventes"
+            name="Enregistrer une vente"
+            parent="menu_ventes"
+            sequence="1"
+            action="vente_action"
+    />
+
+<!--    &lt;!&ndash; Vue Etat Caisse &ndash;&gt;-->
+<!--    <record id="view_etat_caisse_tree" model="ir.ui.view">-->
+<!--        <field name="name">usine.etat.caisse</field>-->
+<!--        <field name="model">usine.etat.caisse</field>-->
+<!--        <field name="priority">4</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Etat Caisse" class="o_sale_order" create="false">-->
+<!--                <field name="date_vente"/>-->
+<!--                <field name="name"/>-->
+<!--                &lt;!&ndash; <field name="vente_id"/>&ndash;&gt;-->
+<!--                <field name="description"/>-->
+<!--                <field name="montant"/>-->
+<!--                <field name="caissier"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Vue Etat Caisse &ndash;&gt;-->
+<!--    <record id="view_etat_caisse_form" model="ir.ui.view">-->
+<!--        <field name="name">usine.etat.caisse.form</field>-->
+<!--        <field name="model">usine.etat.caisse</field>-->
+<!--        <field name="priority">4</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Etat Caisse" class="o_sale_order" create="false">-->
+<!--                <field name="date_vente"/>-->
+<!--                <field name="name"/>-->
+<!--                &lt;!&ndash; <field name="vente_id"/>&ndash;&gt;-->
+<!--                <field name="description"/>-->
+<!--                <field name="montant"/>-->
+<!--                <field name="caissier"/>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action  pour ouvrir la liste de vente &ndash;&gt;-->
+<!--    <record id="etat_caisse_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Etat Caisse</field>-->
+<!--        <field name="res_model">usine.etat.caisse</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="search_view_id" ref="view_etat_caisse_form"/>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="oe_view_nocontent_create">-->
+<!--                Cliquez pour enregistrer une enttrée ou sortie-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--    -->
+<!--    &lt;!&ndash; LE Menu Enregistrer une vente&ndash;&gt;-->
+<!--    <menuitem-->
+<!--            id="menu_etat_caisse"-->
+<!--            name="Etat des ventes"-->
+<!--            parent="menu_ventes"-->
+<!--            sequence="1"-->
+<!--            action="etat_caisse_action"-->
+<!--    />-->
+
+    <!-- LE Menu Ventes-->
+    <menuitem
+            id="menu_caisse"
+            name="Caisse"
+            parent="menu_usine"
+            sequence="2"
+    />
+
+
+    <!-- Vue form appro caisse -->
+
+    <record id="view_apro_caisse_form" model="ir.ui.view">
+        <field name="name">usine.appro.caisse.form</field>
+        <field name="model">usine.appro.caisse</field>
+        <field name="arch" type="xml">
+            <form string="Appro Caisse">
+                <sheet>
+
+                    <group name="Vente">
+                        <field name="date" class="oe_inline"/>
+                        <field name="description" class="oe_inline" required="1"/>
+                        <field name="montant" class="oe_inline" required="1"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <!-- Vue list Appro Caisse -->
+    <record id="view__apro_caisse_tree" model="ir.ui.view">
+        <field name="name">usine.appro.caisse</field>
+        <field name="model">usine.appro.caisse</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Appro Caisse" class="o_sale_order" >
+                <field name="numero_piece_appro" />
+                <field name="description" />
+                <field name="montant" />
+                <field name="caissier"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste appro caisse -->
+    <record id="appro_caisse_action" model="ir.actions.act_window">
+        <field name="name">Appro Caisse</field>
+        <field name="res_model">usine.appro.caisse</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_apro_caisse_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour approvisionner
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu Appro caisse-->
+    <menuitem
+            id="menu_appro_caisse"
+            name="Appro Caisse"
+            parent="menu_caisse"
+            sequence="3"
+            action="appro_caisse_action"
+    />
+
+    <!-- Vue form sortie caisse -->
+
+    <record id="view_sortie_caisse_form" model="ir.ui.view">
+        <field name="name">usine.sortie.caisse.form</field>
+        <field name="model">usine.sortie.caisse</field>
+        <field name="arch" type="xml">
+            <form string="Sortie Caisse">
+                <sheet>
+
+                    <group name="Sortie Caisse">
+                        <field name="date" class="oe_inline"/>
+                        <field name="description" class="oe_inline" required="1"/>
+                        <field name="montant" class="oe_inline" required="1"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <!-- Vue list Sortie Caisse -->
+    <record id="view_sortie_caisse_tree" model="ir.ui.view">
+        <field name="name">usine.sortie.caisse</field>
+        <field name="model">usine.sortie.caisse</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Sortie Caisse" class="o_sale_order" >
+                <field name="numero_piece_sortie" />
+                <field name="description" />
+                <field name="montant" />
+                <field name="caissier"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste appro caisse -->
+    <record id="sortie_caisse_action" model="ir.actions.act_window">
+        <field name="name">Sortie Caisse</field>
+        <field name="res_model">usine.sortie.caisse</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sortie_caisse_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour approvisionner
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu Sortie caisse-->
+    <menuitem
+            id="menu_sortie_caisse"
+            name="Sortie Caisse"
+            parent="menu_caisse"
+            sequence="3"
+            action="sortie_caisse_action"
+    />
+
+    <!-- Vue form sortie caisse -->
+
+    <record id="view_etat_caisse_form" model="ir.ui.view">
+        <field name="name">usine.caisse.form</field>
+        <field name="model">usine.caisse</field>
+        <field name="arch" type="xml">
+            <form string="Caisse" create="false" editable="false">
+                <sheet>
+
+                    <group name="Caisse">
+                        <field name="name" class="oe_inline"/>
+                        <field name="montant" class="oe_inline" required="1"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <!-- Vue list Etat Caisse -->
+    <record id="view_etat_caisse_tree" model="ir.ui.view">
+        <field name="name">usine.caisse</field>
+        <field name="model">usine.caisse</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Caisse" class="o_sale_order"  create="false">
+                <field name="name"/>
+                <field name="montant"  decoration-success="montant &gt; 0" decoration-danger="montant &lt; 0" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour afficher etat caisse -->
+    <record id="caisse_action" model="ir.actions.act_window">
+        <field name="name">Caisse</field>
+        <field name="res_model">usine.caisse</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_etat_caisse_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour approvisionner
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu Etat caisse-->
+    <menuitem
+            id="menu_caisse_status"
+            name="Caisse"
+            parent="menu_caisse"
+            sequence="3"
+            action="caisse_action"
+    />
+
+
+
+
+
+    <!-- Vue form appro caisse -->
+
+    <record id="view_article_vente_form" model="ir.ui.view">
+        <field name="name">usine.type.article.form</field>
+        <field name="model">usine.type.article</field>
+        <field name="arch" type="xml">
+            <form string="Articles de Vente">
+                <sheet>
+
+                    <group name="Articles Vente">
+                        <field name="name" class="oe_inline" required="1"/>
+                           <field name="description" class="oe_inline" required="1"/>
+                           <field name="prix" class="oe_inline" required="1"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue list Appro Caisse -->
+    <record id="view_article_vente_tree" model="ir.ui.view">
+        <field name="name">usine.type.article</field>
+        <field name="model">usine.type.article</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Appro Caisse" class="o_sale_order" >
+                <field name="name" class="oe_inline"/>
+                <field name="description" class="oe_inline" required="1"/>
+                <field name="prix" class="oe_inline" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour afficher etat caisse -->
+    <record id="article_vente_action" model="ir.actions.act_window">
+        <field name="name">Article Vente</field>
+        <field name="res_model">usine.type.article</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_article_vente_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un article pour les ventes
+            </p>
+        </field>
+    </record>
+
+        <!-- LE Menu Ventes-->
+    <menuitem
+            id="menu_article_vente"
+            name="Articles de Vente"
+            parent="menu_configuration"
+            sequence="5"
+            action="article_vente_action"
+    />
+
+
+</odoo>

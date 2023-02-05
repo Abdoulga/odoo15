@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="usine_type_operation" model="usine.type.operation">
+            <field name="name">Ensachage</field>
+            <field name="taux">15</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sequence_numero" model="ir.sequence">
+        <field name="name">Numéro pièce</field>
+        <field name="code">numero</field>
+        <field name="active">TRUE</field>
+        <field name="prefix"></field>
+        <field name="padding">1</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_appro_numero_piece" model="ir.sequence">
+        <field name="name">Numéro pièce appro</field>
+        <field name="code">numero.piece.appro</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">APPRO</field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_sortie_numero_piece" model="ir.sequence">
+        <field name="name">Numéro pièce sortie</field>
+        <field name="code">numero.piece.sortie</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">SORTIE</field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+    <record id="sequence_numero_vente" model="ir.sequence">
+        <field name="name">Numéro Vente</field>
+        <field name="code">numero.vente</field>
+        <field name="active">TRUE</field>
+        <field name="prefix">VTES</field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+</odoo>

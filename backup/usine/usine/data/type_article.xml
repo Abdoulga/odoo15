@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="usine_type_article_100" model="usine.type.article">
+            <field name="name">Vente à crédit</field>
+            <field name="description">Vente à crédit</field>
+            <field name="id">100</field>
+        </record>
+    </data>
+    <data noupdate="0">
+        <record id="usine_type_article_101" model="usine.type.article">
+            <field name="name">Recouvrement de Crédit</field>
+            <field name="description">Recouvrement de Crédit</field>
+            <field name="id">101</field>
+        </record>
+    </data>
+</odoo>

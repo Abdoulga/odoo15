@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<odoo>
+   <record id="action_payment_femme" model="ir.actions.report">
+      <field name="name">Payment Femmes</field>
+      <field name="model">usine.pointage.femme</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">usine.usine_payment_femme</field>
+      <field name="report_file">usine.payment_femme</field>
+      <field name="print_report_name">'Payment des femmes du %s %s' %(object.mois,object.year)</field>
+      <field name="binding_model_id" ref="model_usine_pointage_femme"/>
+   </record>
+
+   <record id="action_payment_manoeuvre" model="ir.actions.report">
+      <field name="name">Payment Manoeuvre</field>
+      <field name="model">usine.pointage.manoeuvre</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">usine.usine_payment_manoeuvre</field>
+      <field name="report_file">usine.payment_manoeuvre</field>
+      <field name="print_report_name">'Payment des manoeuvres du %s %s' %(object.mois,object.year)</field>
+      <field name="binding_model_id" ref="model_usine_pointage_manoeuvre"/>
+   </record>
+
+   <record id="action_payment_vendeur" model="ir.actions.report">
+      <field name="name">Payment Vendeur</field>
+      <field name="model">usine.pointage.vendeur</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="report_name">usine.usine_payment_vendeur</field>
+      <field name="report_file">usine.payment_vendeur</field>
+      <field name="print_report_name">'Payment des vendeurs du %s %s' %(object.mois,object.year)</field>
+      <field name="binding_model_id" ref="model_usine_pointage_vendeur"/>
+   </record>
+</odoo>

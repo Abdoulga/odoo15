@@ -1,0 +1,60 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_manoeuvre_usine_user,Usine manoeuvre user,model_usine_manoeuvre,usine_group_user,1,1,1,1
+access_manoeuvre_usine_manager,Usine manoeuvre manager,model_usine_manoeuvre,usine_group_manager,1,1,1,1
+access_pointage_manoeuvre_usine_user,Usine pointage manoeuvre manager,model_usine_pointage_manoeuvre,usine_group_manager,1,1,1,1
+access_pointage_manoeuvre_usine_manager,Usine pointage manoeuvre user,model_usine_pointage_manoeuvre,usine_group_user,1,1,1,1
+access_pointage_manoeuvre_lines_usine_user,Usine manoeuvre line manager,model_usine_pointage_manoeuvre_lines,usine_group_manager,1,1,1,1
+access_pointage_manoeuvre_lines_usine_manager,Usine manoeuvre line user,model_usine_pointage_manoeuvre_lines,usine_group_user,1,1,1,1
+access_femme_usine_user,Usine femme user,model_usine_femme,usine_group_user,1,1,1,1
+access_femme_usine_manager,Usine femme manager,model_usine_femme,usine_group_manager,1,1,1,1
+access_pointage_femme_usine_user,Usine pointage femme manager,model_usine_pointage_femme,usine_group_manager,1,1,1,1
+access_pointage_femme_usine_manager,Usine pointage femme user,model_usine_pointage_femme,usine_group_user,1,1,1,1
+access_pointage_femme_lines_usine_user,Usine femme line manager,model_usine_pointage_femme_lines,usine_group_manager,1,1,1,1
+access_pointage_femme_lines_usine_manager,Usine femme line user,model_usine_pointage_femme_lines,usine_group_user,1,1,1,1
+access_vendeur_usine_user,Usine vendeur user,model_usine_vendeur,usine_group_user,1,1,1,1
+access_vendeur_usine_manager,Usine vendeur manager,model_usine_vendeur,usine_group_manager,1,1,1,1
+access_pointage_vendeur_usine_user,Usine pointage vendeur manager,model_usine_pointage_vendeur,usine_group_manager,1,1,1,1
+access_pointage_vendeur_usine_manager,Usine pointage vendeur user,model_usine_pointage_vendeur,usine_group_user,1,1,1,1
+access_pointage_vendeur_lines_usine_user,Usine vendeur line manager,model_usine_pointage_vendeur_lines,usine_group_manager,1,1,1,1
+access_pointage_vendeur_lines_usine_manager,Usine vendeur line user,model_usine_pointage_vendeur_lines,usine_group_user,1,1,1,1
+access_suivi_usine_user,Usine suivi materiaux user,model_usine_suivi,usine_group_user,1,1,1,1
+access_suivi_usine_manager,Usine suivi materiaux manager,model_usine_suivi,usine_group_manager,1,1,1,1
+access_usine_suivi_lines_user,Usine suivi materiaux lines user,model_usine_suivi_lines,usine_group_user,1,1,1,1
+access_usine_suivi_lines_manager,Usine suivi materiaux lines manager,model_usine_suivi_lines,usine_group_manager,1,1,1,1
+access_usine_rapport_suivi_user,Usine rapport suivi  user,model_usine_rapport_suivi,usine_group_user,1,1,1,1
+access_usine_rapport_suivi_manager,Usine rapport suivi manager,model_usine_rapport_suivi,usine_group_manager,1,1,1,1
+access_payment_femme_lines_usine_user,Usine femme payment line manager,model_usine_payment_femme_lines,usine_group_manager,1,1,1,1
+access_payment_femme_lines_usine_manager,Usine femme payment line user,model_usine_payment_femme_lines,usine_group_user,1,1,1,1
+access_payment_manoeuvre_lines_usine_user,Usine manoeuvre payment line manager,model_usine_payment_manoeuvre_lines,usine_group_manager,1,1,1,1
+access_payment_manoeuvre_lines_usine_manager,Usine manoeuvre payment line user,model_usine_payment_manoeuvre_lines,usine_group_user,1,1,1,1
+access_payment_vendeur_lines_usine_user,Usine vendeur payment line manager,model_usine_payment_vendeur_lines,usine_group_manager,1,1,1,1
+access_payment_vendeur_lines_usine_manager,Usine vendeur payment line user,model_usine_payment_vendeur_lines,usine_group_user,1,1,1,1
+access_usine_type_operation_user,Usine type operation  user,model_usine_type_operation,usine_group_user,1,1,1,1
+access_usine_type_operation_manager,Usine type operation manager,model_usine_type_operation,usine_group_manager,1,1,1,1
+access_usine_entree_stock_manager,Usine entree stock manager,model_usine_entree,usine_group_manager,1,1,1,1
+access_usine_entree_stock_user,Usine entree stock user,model_usine_entree,usine_group_user,1,1,1,1
+access_usine_sortie_stock_manager,Usine sortie stock manager,model_usine_sortie,usine_group_manager,1,1,1,1
+access_usine_sortie_stock_user,Usine sortie stock user,model_usine_sortie,usine_group_user,1,1,1,1
+access_usine_article_stock_manager,Usine article stock manager,model_usine_article,usine_group_manager,1,1,1,1
+access_usine_article_stock_user,Usine article stock user,model_usine_article,usine_group_user,1,1,1,1
+access_usine_vehicle_manager,Usine vehicle manager,fleet.model_fleet_vehicle,usine_group_manager,1,1,1,1
+access_usine_vehicle_user,Usine vehicle user,fleet.model_fleet_vehicle,usine_group_user,1,1,1,1
+access_usine_vente_manager,Usine vente manager,model_usine_vente,usine_group_manager,1,1,1,1
+access_usine_vente_user,Usine vente user,model_usine_vente,usine_group_user,1,1,1,1
+access_usine_vente_line_manager,Usine vente line manager,model_usine_vente_lines,usine_group_manager,1,1,1,1
+access_usine_vente_line_user,Usine vente line user,model_usine_vente_lines,usine_group_user,1,1,1,1
+access_usine_type_article_manager,Usine type article manager,model_usine_type_article,usine_group_manager,1,1,1,1
+access_usine_type_article_user,Usine type article user,model_usine_type_article,base.group_user,1,1,1,1
+access_usine_account_tax_user,Usine account tax user,account.model_account_tax,base.group_user,1,1,1,1
+access_usine_synthese_user,Usine synthese user,model_usine_synthese,base.group_user,1,1,1,1
+access_usine_synthese_manager,Usine synthese manager,model_usine_synthese,usine_group_manager,1,1,1,1
+access_usine_etat_caisse_user,Usine etat caisse user,model_usine_etat_caisse,base.group_user,1,1,1,1
+access_usine_etat_caisse_manager,Usine etat caisse manager,model_usine_etat_caisse,usine_group_manager,1,1,1,1
+access_usine_mouvement_stock_user,Usine mouvement stock user,model_usine_mouvement_stock,base.group_user,1,1,1,1
+access_usine_mouvement_stock_manager,Usine mouvement stock manager,model_usine_mouvement_stock,usine_group_manager,1,1,1,1
+access_usine_caisse_user,Usine caisse user,model_usine_caisse,base.group_user,1,1,1,1
+access_usine_caisse_manager,Usine mouvement stock manager,model_usine_caisse,usine_group_manager,1,1,1,1
+access_usine_appro_caisse_user,Usine appro caisse user,model_usine_appro_caisse,base.group_user,1,1,1,1
+access_usine_appro_caisse_manager,Usine appro caisse manager,model_usine_appro_caisse,usine_group_manager,1,1,1,1
+access_usine_sortie_caisse_user,Usine sortie caisse user,model_usine_sortie_caisse,base.group_user,1,1,1,1
+access_usine_sortie_caisse_manager,Usine sortie caisse manager,model_usine_sortie_caisse,usine_group_manager,1,1,1,1

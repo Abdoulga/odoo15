@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- LE Menu Caisse-->
+    <menuitem
+        id="menu_caisse"
+        name="Caisse"
+        parent="menu_usine"
+        sequence="1"
+    />
+    <!-- LE Menu Encaisser ventes-->
+    <menuitem
+        id="menu_encaissement"
+        name="Encaisser ventes"
+        parent="menu_caisse"
+        sequence="1"
+    />
+
+    <!-- LE Menu Etat Caisse-->
+    <menuitem
+        id="menu_etat_caisse"
+        name="Etat Caisse"
+        parent="menu_caisse"
+        sequence="1"
+    />
+    <!-- LE Menu Ventes-->
+    <menuitem
+        id="menu_ventes"
+        name="Ventes"
+        parent="menu_usine"
+        sequence="2"
+    />
+    <!-- LE Menu Enregistrer une vente-->
+    <menuitem
+        id="menu_enregister_ventes"
+        name="Enregistrer une vente"
+        parent="menu_ventes"
+        sequence="1"
+    />
+        <!-- LE Menu Stocks-->
+    <menuitem
+        id="menu_stocks"
+        name="Stocks"
+        parent="menu_usine"
+        sequence="3"
+    />
+
+
+
+
+
+    <!-- LE Menu Retour-->
+    <menuitem
+        id="menu_retour"
+        name="Retour"
+        parent="menu_stocks"
+        sequence="1"
+    />
+
+    <!-- LE Menu Ajustement-->
+    <menuitem
+        id="menu_ajustement"
+        name="Ajustement"
+        parent="menu_stocks"
+        sequence="1"
+    />
+
+    <!-- LE Menu Etat du Stock-->
+    <menuitem
+        id="menu_etat_stock"
+        name="Etat du Stock"
+        parent="menu_stocks"
+        sequence="1"
+    />
+
+
+
+
+
+    <record id="view_usine_entree_form" model="ir.ui.view">
+                <field name="name">usine.entree.form</field>
+                <field name="model">usine.entree</field>
+                <field name="arch" type="xml">
+                  <form string="Chargement / Sortie">
+                   <sheet>
+                       <group name="Chargement / Sortie" colspan="2">
+                           <field name="date_entree" class="oe_inline"/>
+                           <field name="ref_article" class="oe_inline"/>
+                           <field name="quantite" class="oe_inline"/>
+                       </group>
+
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!--Entrée TREE view-->
+    <record id="view_usine_entree_tree" model="ir.ui.view">
+         <field name="name">usine.entree view </field>
+        <field name="model">usine.entree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_entree"/>
+                <field name="ref_article"/>
+                <field name="quantite"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Sortie TREE view-->
+    <record id="view_usine_sortie_tree" model="ir.ui.view">
+         <field name="name">uusine.sortie view (in Suivi)</field>
+        <field name="model">usine.sortie</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_sortie"/>
+                <field name="ref_article"/>
+                <field name="quantite"/>
+                <field name="vehicule_id"/>
+                <field name="vendeur_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste des type d'opération -->
+    <record id="usine_entree_action" model="ir.actions.act_window">
+        <field name="name">Entrée</field>
+        <field name="res_model">usine.entree</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_usine_entree_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer une entrée d'articles
+            </p>
+        </field>
+    </record>
+
+    <!-- LE Menu Entrée-->
+    <menuitem
+        id="menu_entree"
+        name="Entrée"
+        parent="usine.menu_stocks"
+        sequence="1"
+        action="usine_entree_action"
+    />
+
+
+
+    <record id="view_usine_sortie_form" model="ir.ui.view">
+                <field name="name">usine.sortie.form</field>
+                <field name="model">usine.sortie</field>
+                <field name="arch" type="xml">
+                  <form string="Chargement / Sortie">
+                   <sheet>
+                       <group col="2" >
+                           <field name="date_sortie"  class="oe_inline"/>
+                           <field name="ref_article"  class="oe_inline"/>
+                           <field name="quantite"  class="oe_inline"/>
+                           <field name="vehicule_id" class="oe_inline"/>
+                           <field name="vendeur_id" class="oe_inline"/>
+                       </group>
+
+
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!--Sortie TREE view-->
+    <record id="view_usine_sortie_tree" model="ir.ui.view">
+         <field name="name">uusine.sortie view (in Suivi)</field>
+        <field name="model">usine.sortie</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_sortie"/>
+                <field name="ref_article"/>
+                <field name="quantite"/>
+                <field name="vehicule_id"/>
+                <field name="vendeur_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste des type d'opération -->
+    <record id="usine_sortie_action" model="ir.actions.act_window">
+        <field name="name">Chargement / Sortie</field>
+        <field name="res_model">usine.sortie</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_usine_sortie_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer une sortie d'articles
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu Sortie-->
+    <menuitem
+        id="menu_sortie"
+        name="Chargement / Sortie"
+        parent="menu_stocks"
+        sequence="1"
+        action="usine_sortie_action"
+    />
+
+    <record id="view_usine_article_form" model="ir.ui.view">
+                <field name="name">usine.article.form</field>
+                <field name="model">usine.article</field>
+                <field name="arch" type="xml">
+                  <form string="Chargement / Sortie">
+                   <sheet>
+                       <group >
+                           <field name="name"/>
+                           <field name="description"/>
+                       </group>
+                       <group>
+                           <field name="prix"/>
+                           <field name="quantite"/>
+                           <field name="unite"/>
+                       </group>
+
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!--Articles TREE view-->
+    <record id="view_usine_article_tree" model="ir.ui.view">
+         <field name="name">usine.article tree view (in Suivi)</field>
+        <field name="model">usine.article</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="prix"/>
+                <field name="quantite"/>
+                <field name="unite"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste des article -->
+    <record id="usine_article_action" model="ir.actions.act_window">
+        <field name="name">Articles</field>
+        <field name="res_model">usine.article</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_usine_article_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un article
+            </p>
+        </field>
+    </record>
+
+
+
+
+    <!-- LE Menu Sortie-->
+    <menuitem
+        id="menu_article"
+        name="Articles"
+        parent="menu_stocks"
+        sequence="1"
+        action="usine_article_action"
+    />
+
+
+    <!--Mouvement Stock TREE view-->
+    <record id="view_usine_mouvement_stock_tree" model="ir.ui.view">
+         <field name="name">usine.mouvement.stock tree view (in Suivi)</field>
+        <field name="model">usine.mouvement.stock</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="ref_article"/>
+                <field name="quantite"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir Mouvement Stock -->
+    <record id="usine_mouvement_stock_action" model="ir.actions.act_window">
+        <field name="name">Mouvement Stock</field>
+        <field name="res_model">usine.mouvement.stock</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_usine_mouvement_stock_tree" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un Mouvement
+            </p>
+        </field>
+    </record>
+    <!-- LE Mouvement Stock-->
+    <menuitem
+        id="menu_mouvement_stock"
+        name="Mouvements Stock"
+        parent="menu_stocks"
+        sequence="1"
+        action="usine_mouvement_stock_action"
+    />
+
+
+
+</odoo>

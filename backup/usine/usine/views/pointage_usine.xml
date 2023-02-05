@@ -1,0 +1,862 @@
+<?xml version="1.0"?>
+<odoo>
+     <!-- LE Menu d'Usine  -->
+     <menuitem id="menu_usine"
+        name="Usine" web_icon="usine,static/description/icon.png"/>
+
+
+
+
+    <!-- LE Menu Production-->
+    <menuitem
+        id="menu_production"
+        name="Production"
+        parent="menu_usine"
+        sequence="4"
+    />
+
+    <menuitem
+        id="menu_pointage"
+        name="Pointages"
+        parent="menu_usine"
+        sequence="5"
+    />
+    <!-- LE Menu Configuration-->
+    <menuitem
+        id="menu_configuration"
+        name="Configuration"
+        parent="menu_usine"
+        sequence="6"
+    />
+
+    <!--Suivi Materiaux TREE view-->
+    <record id="suivi_materiaux_tree_view" model="ir.ui.view">
+         <field name="name">usine.suivi tree view (in Suivi)</field>
+        <field name="model">usine.suivi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="mois_year" />
+		        <field name="cumul_nb_rouleaux_bleute" sum="Total" required="1"/>
+                <field name="cumul_poids_total_bleute" sum="Total" required="1"/>                
+                <field name="cumul_production_total" sum="Total" required="1"/>
+                <field name="cumul_ratio" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_suivi_materiaux_form" model="ir.ui.view">
+                <field name="name">usine.suivi.form</field>
+                <field name="model">usine.suivi</field>
+                <field name="arch" type="xml">
+                  <form string="Suivi Marériaux">
+                   <header>
+
+                   </header>
+                   <sheet>
+                       <group name="name">
+
+                           <div class="row" >
+                                <div class="col-1"><label for="mois"/></div>
+
+                                <div class="col-4" >
+                                    <field name="mois" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                           <br/>
+                            <div class="row" >
+                                <div class="col-1"><label for="year"/></div>
+
+                                <div class="col-4" >
+                                    <field name="year" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                       </group>
+                       <notebook string="Lignes de suivi">
+                        <page string="Lignes de suivi">
+                            <field
+                                name="suivi_lines"
+                                widget="section_and_note_one2many"
+                                mode="tree,kanban"
+                            >
+
+                                <tree string="Suivi Marériaux"
+                                      editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Ajouter une ligne"/>
+                                    </control>
+				                    <field name="semaine"  width="70px" required="1"/>
+                                    <field name="nb_sac"  width="70px"  sum="Total" required="1"/>
+                                    <field name="sachet_production"  width="85px" sum="Total" required="1" />
+                                    <field name="sachet_reconditionnement"  width="110px" sum="Total" required="1" />
+                                    <field name="sachet_total"  sum="Total" width="60px"/>
+                                    <field name="nb_rouleaux_bandeaux"  sum="Total" width="100px"/>
+                                    <field name="nb_rouleaux_bleute"  sum="Total" width="90px" />
+                                    <field name="poids_total_bleute"  sum="Total" width="100px" />
+                                    <field name="production_total"  sum="Total" width="80px"/>
+                                    <field name="ratio" width="40px"/>
+                                    <field name="observation"  width="55px"/>
+                                    <field name="suivi_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+                        </page>
+
+                       </notebook>
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+
+    <!--Suivi TREE view-->
+    <record id="usine_femme_tree_view" model="ir.ui.view">
+        <field name="name">usine.femme search view (in femme)</field>
+        <field name="model">usine.femme</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste de suivi des matériaux-->
+    <record id="suivi_materiaux_action" model="ir.actions.act_window">
+        <field name="name">Suivi Matériaux</field>
+        <field name="res_model">usine.suivi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_suivi_materiaux_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer une ligne
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="menu_suivi_materiaux"
+        name="Fiche de Suivi des matériaux"
+        sequence="1"
+        parent="usine.menu_production"
+        action="suivi_materiaux_action"
+    />
+
+
+    <!--Rapport Suivi Materiaux TREE view-->
+    <record id="rapport_suivi_materiaux_tree_view" model="ir.ui.view">
+         <field name="name">usine.rapport.suivi tree view (in Suivi)</field>
+        <field name="model">usine.rapport.suivi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cumul_nb_rouleaux_bleute" />
+                <field name="cumul_poids_total_bleute" />
+                <field name="cumul_production_total" />
+                <field name="cumul_ratio" />
+            </tree>
+        </field>
+    </record>
+
+    <!--Rapport Suivi Materiaux TREE view-->
+    <record id="rapport_suivi_materiaux_search_view" model="ir.ui.view">
+         <field name="name">usine.rapport.suivi search view (in Suivi)</field>
+        <field name="model">usine.rapport.suivi</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cumul_nb_rouleaux_bleute" />
+                <field name="cumul_poids_total_bleute" />
+                <field name="cumul_production_total" />
+                <field name="cumul_ratio" />
+            </search>
+        </field>
+    </record>
+    <!-- Action  pour ouvrir la liste de suivi des matériaux-->
+    <record id="rapport_suivi_materiaux_action" model="ir.actions.act_window">
+        <field name="name">Rapport Suivi Matériaux</field>
+        <field name="res_model">usine.rapport.suivi</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_suivi_materiaux_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer une ligne
+            </p>
+        </field>
+    </record>
+    <!--<menuitem
+        id="menu_rapport_suivi_materiaux"
+        name="Rapport Suivi des matériaux"
+        sequence="2"
+        parent="usine.menu_production"
+        action="rapport_suivi_materiaux_action"
+    />-->
+
+
+
+
+
+    <!--Femme FORM view-->
+    <record id="usine_femme_form_view" model="ir.ui.view">
+        <field name="name">usine.femme search view (in femme)</field>
+        <field name="model">usine.femme</field>
+        <field name="arch" type="xml">
+            <form string="Femme">
+                <sheet>
+                        <group name="name">
+                            <field name="name" />
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Femmes SEARCH view-->
+    <record id="usine_femme_search_view" model="ir.ui.view">
+        <field name="name">usine.femme search view (in femme)</field>
+        <field name="model">usine.femme</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <!--Femmes TREE view-->
+    <record id="usine_femme_tree_view" model="ir.ui.view">
+        <field name="name">usine.femme search view (in femme)</field>
+        <field name="model">usine.femme</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+     <!-- Action  pour ouvrir la liste des  femmes -->
+    <record id="femme_action" model="ir.actions.act_window">
+        <field name="name">Femmes</field>
+        <field name="res_model">usine.femme</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="usine_femme_search_view" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer une femme
+            </p>
+        </field>
+    </record>
+    <!-- LE Menu   Liste des femmes-->
+    <menuitem
+        id="menu_configuration_femme"
+        name="Liste des femmes"
+        sequence="2"
+        parent="usine.menu_configuration"
+        action="femme_action"
+    />
+
+
+
+
+
+
+    <!--Manoeuvre FORM view-->
+    <record id="usine_manoeuvre_form_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre form view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <form string="Manœuvres">
+                <sheet>
+                        <group name="name">
+                            <field name="name" />
+                        </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Manoeuvres SEARCH view-->
+    <record id="usine_manoeuvre_search_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre search view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <!--Manoeuvres TREE view-->
+    <record id="usine_manoeuvre_tree_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre search view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+     <!-- Action  pour ouvrir la liste des  manoeuvres -->
+    <record id="manoeuvre_action" model="ir.actions.act_window">
+        <field name="name">Manœuvres</field>
+        <field name="res_model">usine.manoeuvre</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="usine_manoeuvre_search_view" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un manoeuvre
+            </p>
+        </field>
+    </record>
+
+
+    <!-- LE Menu   Liste des manoeuvres-->
+    <!--<menuitem
+        id="menu_configuration_manoeuvre"
+        name="Manœuvres"
+        sequence="3"
+        parent="usine.menu_configuration"
+        action="manoeuvre_action"
+    />-->
+
+      <!--Manoeuvre FORM view-->
+    <record id="usine_manoeuvre_form_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre form view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <form string="Manœuvres">
+                <sheet>
+                    <group>
+                        <group name="name">
+                            <field name="name" />
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Manoeuvres SEARCH view-->
+    <record id="usine_manoeuvre_search_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre search view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <!--Manoeuvres TREE view-->
+    <record id="usine_manoeuvre_tree_view" model="ir.ui.view">
+        <field name="name">usine.manoeuvre search view (in manoeuvre)</field>
+        <field name="model">usine.manoeuvre</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+     <!-- Action  pour ouvrir la liste des  manoeuvres -->
+    <record id="manoeuvre_action" model="ir.actions.act_window">
+        <field name="name">Manœuvres</field>
+        <field name="res_model">usine.manoeuvre</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="usine_manoeuvre_search_view" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un manoeuvre
+            </p>
+        </field>
+    </record>
+
+
+    <!-- LE Menu   Liste des manoeuvres-->
+    <menuitem
+        id="menu_configuration_manoeuvre"
+        name="Liste des manœuvres"
+        sequence="3"
+        parent="usine.menu_configuration"
+        action="manoeuvre_action"
+    />
+
+
+
+
+
+
+
+
+
+    <!--Vendeur FORM view-->
+    <record id="usine_vendeur_form_view" model="ir.ui.view">
+        <field name="name">usine.vendeur form view (in vendeur)</field>
+        <field name="model">usine.vendeur</field>
+        <field name="arch" type="xml">
+            <form string="Vendeurs">
+                <sheet>
+                        <group name="name">
+                            <field name="name" />
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--Vendeurs SEARCH view-->
+    <record id="usine_vendeur_search_view" model="ir.ui.view">
+        <field name="name">usine.vendeur search view (in vendeur)</field>
+        <field name="model">usine.vendeur</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <!--Vendeurs TREE view-->
+    <record id="usine_vendeur_tree_view" model="ir.ui.view">
+        <field name="name">usine.vendeur search view (in vendeur)</field>
+        <field name="model">usine.vendeur</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+     <!-- Action  pour ouvrir la liste des  vendeurs -->
+    <record id="vendeur_action" model="ir.actions.act_window">
+        <field name="name">Vendeurs</field>
+        <field name="res_model">usine.vendeur</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="usine_vendeur_search_view" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un vendeur
+            </p>
+        </field>
+    </record>
+
+
+    <!-- LE Menu   Liste des vendeurs-->
+    <menuitem
+        id="menu_configuration_vendeur"
+        name="Liste des vendeurs"
+        sequence="4"
+        parent="usine.menu_configuration"
+        action="vendeur_action"
+    />
+
+
+
+
+
+
+
+
+
+
+    <!--  Pointage femmes form view-->
+
+    <record id="view_pointage_femme_form" model="ir.ui.view">
+                <field name="name">usine.pointage.femme.form</field>
+                <field name="model">usine.pointage.femme</field>
+                <field name="arch" type="xml">
+                  <form string="Pointages Femmes">
+                   <sheet>
+                       <group name="Pointages Femmes">
+                           <field name="name" invisible="1"/>
+
+                           <div class="row" >
+                                <div class="col-1"><label for="mois"/></div>
+
+                                <div class="col-4" >
+                                    <field name="mois" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                           <br/>
+                            <div class="row" >
+                                <div class="col-1"><label for="year"/></div>
+
+                                <div class="col-4" >
+                                    <field name="year" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                       </group>
+                       <notebook string="Lignes de pointage femmes">
+                        <page string="Lignes de pointage femmes">
+                            <field
+                                name="pointage_lines"
+                                widget="section_and_note_one2many"
+                                mode="tree,kanban"
+                            >
+
+                                <tree string="Sales Order Lines"
+                                      editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Ajouter une ligne"/>
+                                    </control>
+                                    <field name="work_day" required="1"/>
+                                    <field name="employee" required="1" width="200px"/>
+                                    <field name="package_number" required="1" width="200px"/>
+                                    <field name="type_operation"/>
+                                    <field name="rate"/>
+                                    <field name="total"/>
+                                    <field name="pointage_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+				<footer>
+                                    <button name="compute_payment" type="object" string="Calculer"/>
+                                </footer>
+                        </page>
+                        <page string="Lignes de paiement femmes">
+                                <field
+                                    name="payment_lines"
+                                    mode="tree,kanban"
+                                >
+
+                                    <tree string="Payment Lines"
+                                    >
+                                        <field name="employee" required="1" width="200px"/>
+                                        <field name="package_number" required="1" width="200px"/>
+                                        <field name="total_payment"/>
+                                        <field name="pointage_id" invisible="1"/>
+
+
+                                    </tree>
+                                </field>
+                         </page>
+
+                       </notebook>
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!-- Vue liste des pointages femmes -->
+    <record id="view_pointage_femme_tree" model="ir.ui.view">
+        <field name="name">usine.pointage.femme.tree</field>
+        <field name="model">usine.pointage.femme</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Pointage Femmes" class="o_sale_order" >
+                <field name="mois_year" />
+                <field name="total_employee"  string="Total pointage" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Pointage femmes search view -->
+    <record id="view_pointage_femmes_search" model="ir.ui.view">
+        <field name="name">usine.pointage.femme.search</field>
+        <field name="model">usine.pointage.femme</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="total_employee"  string="Total employés" readonly="1" />
+                <field name="mois" string="Mois" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action  pour ouvrir la liste de pointage des  femmes -->
+    <record id="pointage_femme_action" model="ir.actions.act_window">
+        <field name="name">Pointages femmes</field>
+        <field name="res_model">usine.pointage.femme</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_pointage_femme_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un pointage
+            </p>
+        </field>
+    </record>
+
+
+
+    <!-- LE Menu   Liste de pointage des femmes-->
+    <menuitem
+        id="menu_pointage_femme"
+        name="Femmes"
+        sequence="1"
+        parent="usine.menu_pointage"
+        action="pointage_femme_action"
+    />
+
+
+
+
+
+
+    <!-- Pointage manoeuvres form view -->
+     <record id="view_pointage_manoeuvre_form" model="ir.ui.view">
+                <field name="name">usine.pointage.manoeuvre.form</field>
+                <field name="model">usine.pointage.manoeuvre</field>
+                <field name="arch" type="xml">
+                  <form string="Pointages Manoeuvres">
+                   <sheet>
+                       <group name="semaine">
+                           <field name="name" invisible="1"/>
+                           <div class="row">
+                               <div class="col-2"><label for="semaine_du"/></div>
+                               <div class="col-5"><field name="semaine_du"/></div>
+                           </div>
+                           <br/>
+                           <div class="row">
+                               <div class="col-2"><label for="semaine_au"/></div>
+                               <div class="col-5"><field name="semaine_au"/></div>
+                           </div>
+
+                       </group>
+                       <notebook string="Lignes de pointage manoeuvres">
+                        <page string="Lignes de pointage manoeuvres">
+                            <field
+                                name="pointage_lines"
+                                widget="section_and_note_one2many"
+                                mode="tree,kanban"
+                            >
+                                <tree string="Sales Order Lines"
+                                      editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Ajouter une ligne"/>
+                                    </control>
+                                    <field name="work_day" required="1"/>
+                                    <field name="employee" required="1" width="200px"/>
+                                    <field name="package_number" required="1"/>
+                                    <field name="type_operation"/>
+                                    <field name="rate"/>
+                                    <field name="total"/>
+                                    <field name="pointage_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+                        <footer>
+                                    <button name="compute_payment" type="object" string="Calculer"/>
+                                </footer>
+                        </page>
+                        <page string="Lignes de paiement manoeuvre">
+                                <field
+                                    name="payment_lines"
+                                    mode="tree,kanban"
+                                >
+
+                                    <tree string="Payment Lines"
+                                    >
+                                        <field name="employee" required="1" width="200px"/>
+                                        <field name="package_number" required="1" width="200px"/>
+                                        <field name="total_payment"/>
+                                        <field name="pointage_id" invisible="1"/>
+
+
+                                    </tree>
+                                </field>
+                         </page>
+
+
+                       </notebook>
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!-- Vue liste des pointages manoeuvre -->
+    <record id="view_pointage_manoeuvre_tree" model="ir.ui.view">
+        <field name="name">usine.pointage.manoeuvre.tree</field>
+        <field name="model">usine.pointage.manoeuvre</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Pointage Manoeuvre" class="o_sale_order" >
+                <field name="semaine_du" />
+                <field name="semaine_au" />
+                <field name="total_employee"  string="Total pointages" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Pointage manoeuvres search view -->
+    <record id="view_pointage_manoeuvre_search" model="ir.ui.view">
+        <field name="name">usine.pointage.manoeuvre.tree</field>
+        <field name="model">usine.pointage.manoeuvre</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="total_employee"  string="Total employés" readonly="1" />
+                <field name="mois" string="Mois" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Action  pour ouvrir la liste de pointage des  manoeuvres -->
+    <record id="pointage_manoeuvre_action" model="ir.actions.act_window">
+        <field name="name">Pointages Manœuvres</field>
+        <field name="res_model">usine.pointage.manoeuvre</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_pointage_manoeuvre_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un pointage
+            </p>
+        </field>
+    </record>
+    <!-- LE Menu   Liste de pointage des manoeuvres-->
+    <menuitem
+        id="menu_pointage_manoeuvre"
+        name="Manœuvres"
+        sequence="2"
+        parent="usine.menu_pointage"
+        action="pointage_manoeuvre_action"
+    />
+
+
+
+
+
+
+    <!-- Pointage vendeurs form view -->
+    <record id="view_pointage_vendeur_form" model="ir.ui.view">
+                <field name="name">usine.pointage.vendeur.form</field>
+                <field name="model">usine.pointage.vendeur</field>
+                <field name="arch" type="xml">
+                  <form string="Pointages Vendeurs">
+                   <sheet>
+                       <group name="name">
+                           <field name="name" invisible="1"/>
+                           <div class="row" >
+                                <div class="col-1"><label for="mois"/></div>
+
+                                <div class="col-4" >
+                                    <field name="mois" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                           <br/>
+                            <div class="row" >
+                                <div class="col-1"><label for="year"/></div>
+
+                                <div class="col-4" >
+                                    <field name="year" class="oe_inline" required="1"/>
+                                </div>
+                            </div>
+                       </group>
+                       <notebook string="Lignes de pointage vendeurs">
+                        <page string="Lignes de pointage vendeurs">
+                            <field
+                                name="pointage_lines"
+                                widget="section_and_note_one2many"
+                                mode="tree,kanban"
+                            >
+                                <tree string="Lignes pointage vendeur"
+                                      editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Ajouter une ligne"/>
+                                    </control>
+                                    <field name="work_day" required="1"/>
+                                    <field name="employee" required="1" width="200px"/>
+                                    <field name="package_number" required="1"/>
+                                    <field name="type_operation"/>
+                                    <field name="commission"/>
+                                    <field name="carburant"/>
+                                    <field name="total"/>
+                                    <field name="pointage_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+                        	<footer>
+                                    <button name="compute_payment" type="object" string="Calculer"/>
+                                </footer>
+                        </page>
+                        <page string="Lignes de paiement vendeur">
+                                <field
+                                    name="payment_lines"
+                                    mode="tree,kanban"
+                                >
+
+                                    <tree string="Payment Lines"
+                                    >
+                                        <field name="employee" required="1" width="200px"/>
+                                        <field name="package_number" required="1" width="200px"/>
+                                        <field name="total_payment"/>
+                                        <field name="pointage_id" invisible="1"/>
+
+
+                                    </tree>
+                                </field>
+                         </page>
+
+                       </notebook>
+                   </sheet>
+
+                  </form>
+                </field>
+     </record>
+
+    <!-- Vue liste des pointages vendeurs -->
+    <record id="view_pointage_vendeur_tree" model="ir.ui.view">
+        <field name="name">usine.pointage.vendeur.tree</field>
+        <field name="model">usine.pointage.vendeur</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Pointage Vendeur" class="o_sale_order" >
+                <field name="mois_year" />
+                <field name="total_vendeur"  string="Total pointage" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Pointage vendeurs search view -->
+    <record id="view_pointage_vendeur_search" model="ir.ui.view">
+        <field name="name">usine.pointage.vendeur.tree</field>
+        <field name="model">usine.pointage.vendeur</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="total_vendeur"  string="Total Vendeurs" readonly="1" />
+                <field name="mois" string="Mois" readonly="1" />
+                <field name="total_package" string="Total paquets" optional="show"/>
+                <field name="amount_total" />
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Action  pour ouvrir la liste de pointage des  vendeurs -->
+    <record id="pointage_vendeur_action" model="ir.actions.act_window">
+        <field name="name">Pointages Vendeurs</field>
+        <field name="res_model">usine.pointage.vendeur</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_pointage_vendeur_form" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Cliquez pour créer un pointage
+            </p>
+        </field>
+    </record>
+    <!-- LE Menu   Liste de pointage des vendeurs-->
+    <menuitem
+        id="menu_pointage_vendeur"
+        name="Vendeurs"
+        sequence="2"
+        parent="usine.menu_pointage"
+        action="pointage_vendeur_action"
+    />
+
+
+
+</odoo>

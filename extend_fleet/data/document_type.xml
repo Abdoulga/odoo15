@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="vehicle_document_type_assurance" model="extend_fleet.document_type">
+            <field name="name">Assurance</field>
+        </record>
+         <record id="vehicle_document_type_ccva" model="extend_fleet.document_type">
+            <field name="name">Visite CCVA</field>
+        </record>
+
+    </data>
+</odoo>
